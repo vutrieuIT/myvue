@@ -36,10 +36,14 @@ export default defineComponent({
     const data = ref("");
 
     const fetchData = () => {
-      ApiUtils.get("http://localhost:3000/posts").then((response) => {
-        console.log(response);
-        data.value = JSON.stringify(response.data);
-      });
+      ApiUtils.get("http://localhost:3000/posts")
+        .then((response) => {
+          console.log(response);
+          data.value = JSON.stringify(response.data);
+        })
+        .catch((error) => {
+          alert(error);
+        });
     };
 
     return { fetchData, data };

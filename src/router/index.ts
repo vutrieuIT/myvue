@@ -1,14 +1,12 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 // import HomeView from "../views/HomeView.vue";
 import ApiView from "@/views/ApiView.vue";
-import RegisterView from "@/views/RegisterView.vue";
+// import RegisterView from "@/views/RegisterView.vue";
+import TestView from "@/views/TestView.vue";
+import BaseView from "@/views/BaseView.vue";
+import ProductItemView from "@/views/ProductItemView.vue";
 
-const routes: Array<RouteRecordRaw> = [
-  {
-    path: "/",
-    name: "home",
-    component: RegisterView,
-  },
+const baseViewChild = [
   {
     path: "/about",
     name: "about",
@@ -22,6 +20,25 @@ const routes: Array<RouteRecordRaw> = [
     path: "/api",
     name: "api",
     component: ApiView,
+  },
+  {
+    path: "/test",
+    name: "test",
+    component: TestView,
+  },
+  {
+    path: "/test/create",
+    name: "test-create",
+    component: ProductItemView,
+  },
+];
+
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: "/",
+    name: "home",
+    component: BaseView,
+    children: baseViewChild,
   },
 ];
 
