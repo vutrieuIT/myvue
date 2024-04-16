@@ -32,7 +32,7 @@
 import { defineComponent, reactive } from "vue";
 // import Password from "primevue/password";
 import InputText from "primevue/inputtext";
-import { ProductDto } from "@/dto/ProductDto";
+import { ProductDto } from "@/dto/productDto";
 import { PropType } from "vue";
 
 export default defineComponent({

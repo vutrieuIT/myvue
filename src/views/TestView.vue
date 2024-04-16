@@ -9,6 +9,14 @@
       @delete-row="onDeleteRow"
       @edit-row="onEditRow"
     />
+    <product-item-dialog
+      :visible="showDialog"
+      @close="
+        () => {
+          showDialog = false;
+        }
+      "
+    />
   </div>
 </template>
 
@@ -18,6 +26,7 @@ import { defineComponent, ref } from "vue";
 import TableComponent from "@/components/TableComponent.vue";
 import Button from "primevue/button";
 import { useRouter } from "vue-router";
+import ProductItemDialog from "@/components/ProductItemDialog.vue";
 
 interface TestForm {
   username: string;
@@ -30,6 +39,7 @@ export default defineComponent({
     // Password,
     TableComponent,
     Button,
+    ProductItemDialog,
   },
   watch: {
     registerDto: {
@@ -41,6 +51,7 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter();
+    const showDialog = ref(false);
 
     const mydata = [
       { id: 1, name: "Apple", category: "Fruit", price: 1 },
@@ -63,6 +74,7 @@ export default defineComponent({
     const onEditRow = (row: unknown) => {
       console.log("view log emit", row);
       alert("Edit row" + JSON.stringify(row));
+      showDialog.value = true;
     };
 
     const createItem = () => {
@@ -72,7 +84,14 @@ export default defineComponent({
       console.log("create item");
     };
 
-    return { registerDto, mydata, onDeleteRow, onEditRow, createItem };
+    return {
+      registerDto,
+      mydata,
+      onDeleteRow,
+      onEditRow,
+      createItem,
+      showDialog,
+    };
   },
 });
 </script>
