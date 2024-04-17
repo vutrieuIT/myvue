@@ -49,12 +49,12 @@ export default defineComponent({
   setup(props, context) {
     const deleteRow = (row: unknown) => {
       console.log("component log emit", row);
-      context.emit("deleteRow", { row });
+      context.emit("deleteRow", row);
     };
 
     const editRow = (row: unknown) => {
       console.log("component log emit", row);
-      context.emit("editRow", { row });
+      context.emit("editRow", row);
     };
 
     const actionShow = computed(() => {

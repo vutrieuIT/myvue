@@ -10,12 +10,14 @@
       @edit-row="onEditRow"
     />
     <product-item-dialog
+      :product="itemSelected"
       :visible="showDialog"
       @close="
         () => {
           showDialog = false;
         }
       "
+      @save="onSave"
     />
   </div>
 </template>
@@ -27,6 +29,7 @@ import TableComponent from "@/components/TableComponent.vue";
 import Button from "primevue/button";
 import { useRouter } from "vue-router";
 import ProductItemDialog from "@/components/ProductItemDialog.vue";
+import { ProductDto } from "@/dto/productDto";
 
 interface TestForm {
   username: string;
@@ -53,6 +56,14 @@ export default defineComponent({
     const router = useRouter();
     const showDialog = ref(false);
 
+    const itemSelected = ref<ProductDto>({
+      id: 0,
+      name: "",
+      price: 0,
+      description: "",
+      category: "",
+    });
+
     const mydata = [
       { id: 1, name: "Apple", category: "Fruit", price: 1 },
       { id: 2, name: "Banana", category: "Fruit", price: 2 },
@@ -71,9 +82,11 @@ export default defineComponent({
       alert("Delete row" + JSON.stringify(row));
     };
 
-    const onEditRow = (row: unknown) => {
-      console.log("view log emit", row);
-      alert("Edit row" + JSON.stringify(row));
+    const onEditRow = (row: ProductDto) => {
+      console.log("view log emit");
+      itemSelected.value = row;
+      console.log("Edit row" + JSON.stringify(row));
+      //   console.log("Edit row" + JSON.stringify(itemSelected));
       showDialog.value = true;
     };
 
@@ -84,6 +97,12 @@ export default defineComponent({
       console.log("create item");
     };
 
+    const onSave = (product: ProductDto) => {
+      itemSelected.value = product;
+      console.log("save item", itemSelected.value);
+      showDialog.value = false;
+    };
+
     return {
       registerDto,
       mydata,
@@ -91,6 +110,8 @@ export default defineComponent({
       onEditRow,
       createItem,
       showDialog,
+      onSave,
+      itemSelected,
     };
   },
 });
