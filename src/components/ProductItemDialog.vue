@@ -15,11 +15,20 @@
         autocomplete="off"
       />
     </div>
-    <div class="flex align-items-center gap-3 mb-5">
+    <div class="flex align-items-center gap-3 mb-3">
       <label for="category" class="font-semibold w-6rem">category</label>
       <InputText
         v-model="productItem.category"
         id="category"
+        class="flex-auto"
+        autocomplete="off"
+      />
+    </div>
+    <div class="flex align-items-center gap-3 mb-5">
+      <label for="price" class="font-semibold w-6rem">price</label>
+      <InputNumber
+        v-model="productItem.price"
+        id="price"
         class="flex-auto"
         autocomplete="off"
       />
@@ -42,6 +51,7 @@ import { PropType } from "vue";
 import Dialog from "primevue/dialog";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
+import InputNumber from "primevue/inputnumber";
 
 export default defineComponent({
   name: "ProductItemDialog",
@@ -49,6 +59,7 @@ export default defineComponent({
     Dialog,
     Button,
     InputText,
+    InputNumber,
   },
   emits: ["update:visible", "close", "save"],
   props: {
