@@ -2,7 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 // import HomeView from "../views/HomeView.vue";
 import ApiView from "@/views/ApiView.vue";
 // import RegisterView from "@/views/RegisterView.vue";
-import TestView from "@/views/TestView.vue";
+import TestView from "@/views/ProductListView.vue";
 import BaseView from "@/views/BaseView.vue";
 import ProductItemView from "@/views/ProductItemView.vue";
 

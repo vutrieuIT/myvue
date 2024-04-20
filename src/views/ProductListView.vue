@@ -69,12 +69,13 @@ export default defineComponent({
 
     const mydataJson = ref([] as ProductDto[]);
 
-    const onDeleteRow = (row: unknown) => {
-      // todo: add process to delete row
+    const onDeleteRow = (row: ProductDto) => {
+      const index = mydataJson.value.findIndex((item) => item.id === row.id);
+      mydataJson.value.splice(index, 1);
     };
 
     const onEditRow = (row: ProductDto) => {
-      itemSelected.value = row;
+      itemSelected.value = { ...row };
       showDialog.value = true;
     };
 
@@ -90,9 +91,18 @@ export default defineComponent({
     };
 
     const onSave = (product: ProductDto) => {
-      itemSelected.value = product;
+      itemSelected.value = { ...product };
       showDialog.value = false;
-      alert("Save" + JSON.stringify(itemSelected));
+      if (itemSelected.value.id === 0) {
+        const id = mydataJson.value.length + 1;
+        itemSelected.value.id = id;
+        mydataJson.value.push(itemSelected.value);
+      } else {
+        const index = mydataJson.value.findIndex(
+          (item) => item.id === itemSelected.value.id
+        );
+        mydataJson.value[index] = itemSelected.value;
+      }
     };
 
     onMounted(() => {
